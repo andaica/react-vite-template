@@ -43,9 +43,9 @@ pipeline {
                     }
                 }
                 echo 'Deploying to Master....'
-                sh 'ssh admin@127.0.0.1 "\
-                    cd Project/React/react-vite-template; \
-                    export PATH=$PATH:/usr/local/bin/docker;
+                sh 'ssh admin@127.0.0.1 \
+                    "cd Project/React/react-vite-template; \
+                    export PATH=$PATH:/usr/local/bin/docker; \
                     ./docker_start_ci.sh -e master"'
             }
         }
