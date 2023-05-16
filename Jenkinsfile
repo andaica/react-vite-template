@@ -19,7 +19,7 @@ pipeline {
 
             steps {
                 echo 'Building Master...'              
-                // sh 'docker rm -f my_vite_demo' // remove running docker container
+                sh 'docker rm -f my_vite_demo' // remove running docker container
                 script {
                     docker.withRegistry('https://registry.gitlab.com', '') {
                         echo 'Build docker image....'                      
@@ -43,7 +43,10 @@ pipeline {
                     }
                 }
                 echo 'Deploying to Master....'
-                sh 'ssh admin@127.0.0.1 "cd Project/React/react-vite-template; ./docker_start_ci.sh -e master"'
+                sh 'ssh admin@127.0.0.1 "\
+                    cd Project/React/react-vite-template; \
+                    export PATH=$PATH:/usr/local/bin/docker;
+                    ./docker_start_ci.sh -e master"'
             }
         }
     }
