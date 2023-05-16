@@ -43,9 +43,7 @@ pipeline {
                     }
                 }
                 echo 'Deploying to Master....'
-                sh 'ssh admin@127.0.0.1 "cd Project/React/react-vite-template; docker run -p 3000:80 --name my_vite_demo vite_demo_latest"'
-
-                sh 'docker image prune -f' // cleanup pruned images  
+                sh 'ssh admin@127.0.0.1 "cd Project/React/react-vite-template; ./docker_start_ci.sh -e master"'
             }
         }
     }
